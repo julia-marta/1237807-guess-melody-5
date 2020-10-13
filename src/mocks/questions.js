@@ -5,32 +5,32 @@ export default [
     type: `genre`,
     genre: `rock`,
     answers: [{
-      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      src: `http://www.mobzvonok.net/mp3/Zemfira/progulka%201.mp3`,
       genre: `rock`,
     }, {
-      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      src: `http://www.mobzvonok.net/mp3/Zemfira/sigarety.mp3`,
       genre: `blues`,
     }, {
-      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      src: `http://www.mobzvonok.net/mp3/Zemfira/rassvety%201.mp3`,
       genre: `jazz`,
     }, {
-      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      src: `http://www.mobzvonok.net/mp3/Zemfira/romashki%201.mp3`,
       genre: `rock`,
     }],
   }, {
     type: `artist`,
     song: {
       artist: `Jim Beam`,
-      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      src: `http://www.mobzvonok.net/mp3/Zemfira/v%20metro.mp3`,
     },
     answers: [{
-      picture: `${AVATAR_URL}/${Math.random()}`,
+      picture: `${AVATAR_URL}/${1}`,
       artist: `John Snow`,
     }, {
-      picture: `${AVATAR_URL}/${Math.random()}`,
+      picture: `${AVATAR_URL}/${2}`,
       artist: `Jack Daniels`,
     }, {
-      picture: `${AVATAR_URL}/${Math.random()}`,
+      picture: `${AVATAR_URL}/${3}`,
       artist: `Jim Beam`,
     }],
   }
