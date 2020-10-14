@@ -5,6 +5,10 @@ import {Redirect} from "react-router-dom";
 import {GameType} from "../../const";
 import QuestionArtistScreen from "../question-artist-screen/question-artist-screen";
 import QuestionGenreScreen from "../question-genre-screen/question-genre-screen";
+import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
+
+const QuestionArtistScreenHoc = withAudioPlayer(QuestionArtistScreen);
+const QuestionGenreScreenHoc = withAudioPlayer(QuestionGenreScreen);
 
 const {ARTIST, GENRE} = GameType;
 
@@ -31,7 +35,7 @@ export default class GameScreen extends PureComponent {
     switch (question.type) {
       case ARTIST:
         return (
-          <QuestionArtistScreen question={question}
+          <QuestionArtistScreenHoc question={question}
             onAnswer={() => {
               this.setState((prevState) => ({
                 step: prevState.step + 1,
@@ -41,7 +45,7 @@ export default class GameScreen extends PureComponent {
         );
       case GENRE:
         return (
-          <QuestionGenreScreen question={question}
+          <QuestionGenreScreenHoc question={question}
             onAnswer={() => {
               this.setState((prevState) => ({
                 step: prevState.step + 1,
