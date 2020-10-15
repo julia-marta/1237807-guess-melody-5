@@ -22,6 +22,16 @@ export default class AudioPlayer extends PureComponent {
     });
   }
 
+  componentDidUpdate() {
+    const audio = this._audioRef.current;
+
+    if (this.props.isPlaying) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  }
+
   componentWillUnmount() {
     const audio = this._audioRef.current;
 
@@ -43,16 +53,6 @@ export default class AudioPlayer extends PureComponent {
         </div>
       </Fragment>
     );
-  }
-
-  componentDidUpdate() {
-    const audio = this._audioRef.current;
-
-    if (this.props.isPlaying) {
-      audio.play();
-    } else {
-      audio.pause();
-    }
   }
 }
 

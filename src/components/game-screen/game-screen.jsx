@@ -7,8 +7,8 @@ import QuestionArtistScreen from "../question-artist-screen/question-artist-scre
 import QuestionGenreScreen from "../question-genre-screen/question-genre-screen";
 import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
 
-const QuestionArtistScreenHoc = withAudioPlayer(QuestionArtistScreen);
-const QuestionGenreScreenHoc = withAudioPlayer(QuestionGenreScreen);
+const QuestionArtistScreenWrapped = withAudioPlayer(QuestionArtistScreen);
+const QuestionGenreScreenWrapped = withAudioPlayer(QuestionGenreScreen);
 
 const {ARTIST, GENRE} = GameType;
 
@@ -35,7 +35,7 @@ export default class GameScreen extends PureComponent {
     switch (question.type) {
       case ARTIST:
         return (
-          <QuestionArtistScreenHoc question={question}
+          <QuestionArtistScreenWrapped question={question}
             onAnswer={() => {
               this.setState((prevState) => ({
                 step: prevState.step + 1,
@@ -45,7 +45,7 @@ export default class GameScreen extends PureComponent {
         );
       case GENRE:
         return (
-          <QuestionGenreScreenHoc question={question}
+          <QuestionGenreScreenWrapped question={question}
             onAnswer={() => {
               this.setState((prevState) => ({
                 step: prevState.step + 1,
