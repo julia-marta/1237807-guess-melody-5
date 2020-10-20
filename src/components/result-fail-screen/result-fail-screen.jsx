@@ -1,6 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/actions";
 
-const ResultFailScreen = () => {
+const ResultFailScreen = ({onReplayButtonClick, resetGame}) => {
 
   return (
     <section className="result">
@@ -9,9 +12,27 @@ const ResultFailScreen = () => {
       </div>
       <h2 className="result__title">Какая жалость!</h2>
       <p className="result__total result__total--fail">У вас закончились все попытки. Ничего, повезёт в следующий раз!</p>
-      <button className="replay" type="button">Попробовать ещё раз</button>
+      <button className="replay" type="button"
+        onClick={() => {
+          resetGame();
+          onReplayButtonClick();
+        }}>
+        Попробовать ещё раз
+      </button>
     </section>
   );
 };
 
-export default ResultFailScreen;
+ResultFailScreen.propTypes = {
+  onReplayButtonClick: PropTypes.func.isRequired,
+  resetGame: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  resetGame() {
+    dispatch(ActionCreator.resetGame());
+  },
+});
+
+export {ResultFailScreen};
+export default connect(null, mapDispatchToProps)(ResultFailScreen);

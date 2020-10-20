@@ -24,13 +24,13 @@ export default [
       src: `http://www.mobzvonok.net/mp3/Zemfira/v%20metro.mp3`,
     },
     answers: [{
-      picture: `${AVATAR_URL}/${1}`,
+      picture: `${AVATAR_URL}/${Math.random()}`,
       artist: `John Snow`,
     }, {
-      picture: `${AVATAR_URL}/${2}`,
+      picture: `${AVATAR_URL}/${Math.random()}`,
       artist: `Jack Daniels`,
     }, {
-      picture: `${AVATAR_URL}/${3}`,
+      picture: `${AVATAR_URL}/${Math.random()}`,
       artist: `Jim Beam`,
     }],
   }

@@ -7,24 +7,29 @@ import QuestionArtistScreen from "../question-artist-screen/question-artist-scre
 import QuestionGenreScreen from "../question-genre-screen/question-genre-screen";
 import Mistakes from "../mistakes/mistakes";
 import questionArtistProp from "../question-artist-screen/question-artist.prop";
-import questionGenreProp from "../question-genre-screen/question-genre.prop";
-import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
-import {GameType} from "../../const";
+import {questionGenreProp} from "../question-genre-screen/question-genre.prop";
+import withActivePlayer from "../../hocs/with-active-player/with-active-player";
+import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
+import {GameType, MAX_MISTAKES_COUNT} from "../../const";
 
 const {ARTIST, GENRE} = GameType;
 
-const QuestionArtistScreenWrapped = withAudioPlayer(QuestionArtistScreen);
-const QuestionGenreScreenWrapped = withAudioPlayer(QuestionGenreScreen);
+const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
+const QuestionGenreScreenWrapped = withActivePlayer(withUserAnswer(QuestionGenreScreen));
 
 const GameScreen = (props) => {
-  const {questions, step, mistakes, onUserAnswer, resetGame} = props;
+  const {questions, step, mistakes, onUserAnswer} = props;
   const question = questions[step];
 
-  if (step >= questions.length || !question) {
-    resetGame();
-
+  if (mistakes >= MAX_MISTAKES_COUNT) {
     return (
-      <Redirect to="/" />
+      <Redirect to="/lose" />
+    );
+  }
+
+  if (step >= questions.length || !question) {
+    return (
+      <Redirect to="/result" />
     );
   }
 
@@ -52,7 +57,6 @@ GameScreen.propTypes = {
   ),
   step: PropTypes.number.isRequired,
   onUserAnswer: PropTypes.func.isRequired,
-  resetGame: PropTypes.func.isRequired,
   mistakes: PropTypes.number.isRequired,
 };
 
@@ -66,9 +70,6 @@ const mapDispatchToProps = (dispatch) => ({
   onUserAnswer(question, answer) {
     dispatch(ActionCreator.incrementStep());
     dispatch(ActionCreator.incrementMistakes(question, answer));
-  },
-  resetGame() {
-    dispatch(ActionCreator.resetGame());
   },
 });
 
