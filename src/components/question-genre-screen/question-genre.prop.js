@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
-import {GameType} from "../../const";
 
-const {shape, arrayOf, string, oneOf} = PropTypes;
-const {ARTIST, GENRE} = GameType;
+const {shape, arrayOf, string} = PropTypes;
 
 export const answerProp = shape({
   src: string.isRequired,
@@ -12,5 +10,5 @@ export const answerProp = shape({
 export const questionGenreProp = shape({
   answers: arrayOf(answerProp).isRequired,
   genre: string.isRequired,
-  type: oneOf([ARTIST, GENRE]).isRequired,
+  type: string.isRequired,
 }).isRequired;

@@ -1,7 +1,7 @@
 const Numeral = {
   SINGULAR: 1,
-  GENITIVE: 2 || 3 || 4,
-  PLURAL: 11 || 12 || 13 || 14
+  GENITIVE: 2 && 3 && 4,
+  PLURAL: 11 && 12 && 13 && 14
 };
 
 const {SINGULAR, GENITIVE, PLURAL} = Numeral;
