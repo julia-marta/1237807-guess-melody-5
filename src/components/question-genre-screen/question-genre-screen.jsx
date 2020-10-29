@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import QuestionGenreItem from "../question-genre-item/question-genre-item";
 import {questionGenreProp} from "./question-genre.prop";
 
+const MemoQuestionGenreItem = React.memo(QuestionGenreItem);
+
 const QuestionGenreScreen = (props) => {
   const {onAnswer, onChange, question, renderPlayer, children, userAnswers} = props;
   const {answers, genre} = question;
@@ -33,7 +35,7 @@ const QuestionGenreScreen = (props) => {
           }}>
 
           {answers.map((answer, i) => (
-            <QuestionGenreItem key={`${i}-${answer.src}`} answer={answer} id={i}
+            <MemoQuestionGenreItem key={`${i}-${answer.src}`} answer={answer} id={i}
               onChange={onChange} renderPlayer={renderPlayer} userAnswer={userAnswers[i]} />
           ))}
 

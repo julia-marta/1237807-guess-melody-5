@@ -1,29 +1,28 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {answerProp} from "../question-genre-screen/question-genre.prop";
 
-export default class QuestionGenreItem extends PureComponent {
-  render() {
-    const {answer, id, onChange, renderPlayer, userAnswer} = this.props;
+const QuestionGenreItem = (props) => {
 
-    return (
-      <div className="track">
-        {renderPlayer(answer.src, id)}
+  const {answer, id, onChange, renderPlayer, userAnswer} = props;
 
-        <div className="game__answer">
-          <input className="game__input visually-hidden" type="checkbox" name="answer"
-            value={`answer-${id}`} id={`answer-${id}`} checked={userAnswer}
-            onChange={(evt) => {
-              const value = evt.target.checked;
-              onChange(id, value);
-            }}
-          />
-          <label className="game__check" htmlFor={`answer-${id}`}>Отметить</label>
-        </div>
+  return (
+    <div className="track">
+      {renderPlayer(answer.src, id)}
+
+      <div className="game__answer">
+        <input className="game__input visually-hidden" type="checkbox" name="answer"
+          value={`answer-${id}`} id={`answer-${id}`} checked={userAnswer}
+          onChange={(evt) => {
+            const value = evt.target.checked;
+            onChange(id, value);
+          }}
+        />
+        <label className="game__check" htmlFor={`answer-${id}`}>Отметить</label>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 QuestionGenreItem.propTypes = {
   answer: answerProp.isRequired,
@@ -32,3 +31,5 @@ QuestionGenreItem.propTypes = {
   renderPlayer: PropTypes.func.isRequired,
   userAnswer: PropTypes.bool.isRequired,
 };
+
+export default QuestionGenreItem;
