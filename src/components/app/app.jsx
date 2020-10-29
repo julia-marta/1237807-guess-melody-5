@@ -1,33 +1,38 @@
 import React from "react";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
 import WelcomeScreen from "../welcome-screen/welcome-screen";
 import LoginScreen from "../login-screen/login-screen";
 import ResultSuccessScreen from "../result-success-screen/result-success-screen";
 import ResultFailScreen from "../result-fail-screen/result-fail-screen";
 import GameScreen from "../game-screen/game-screen";
-import {MAX_MISTAKES_COUNT} from "../../const";
+import PrivateRoute from "../private-route/private-route";
+import browserHistory from "../../browser-history";
+import {MAX_MISTAKES_COUNT, AppRoute} from "../../const";
+
+const {ROOT, GAME, LOGIN, SUCCESS, FAIL} = AppRoute;
 
 const App = () => {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path="/" render={({history}) => (
-          <WelcomeScreen onPlayButtonClick={() => history.push(`/game`)} errorsCount={MAX_MISTAKES_COUNT} />
+        <Route exact path={ROOT} render={({history}) => (
+          <WelcomeScreen onPlayButtonClick={() => history.push(GAME)} errorsCount={MAX_MISTAKES_COUNT} />
         )}
         />
-        <Route exact path="/login">
-          <LoginScreen />
-        </Route>
-        <Route exact path="/result" render={({history}) => (
-          <ResultSuccessScreen onReplayButtonClick={() => history.push(`/game`)} />
+        <Route exact path={LOGIN} render={({history}) => (
+          <LoginScreen onReplayButtonClick={() => history.push(GAME)} />
         )}
         />
-        <Route exact path="/lose" render={({history}) => (
-          <ResultFailScreen onReplayButtonClick={() => history.push(`/game`)} />
+        <PrivateRoute exact path={SUCCESS} render={({history}) => {
+          return <ResultSuccessScreen onReplayButtonClick={() => history.push(GAME)} />;
+        }} />
+
+        <Route exact path={FAIL} render={({history}) => (
+          <ResultFailScreen onReplayButtonClick={() => history.push(GAME)} />
         )}
         />
-        <Route exact path="/game">
+        <Route exact path={GAME}>
           <GameScreen />
         </Route>
       </Switch>
