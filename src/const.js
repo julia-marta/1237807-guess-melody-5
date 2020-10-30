@@ -21,4 +21,9 @@ export const APIRoute = {
   LOGIN: `/login`,
 };
 
-export const MAX_MISTAKES_COUNT = 3;
+export const HttpCode = {
+  SUCCESS: 200,
+  UNAUTHORIZED: 401
+};
+
+export const MAX_MISTAKES_COUNT = 13;
