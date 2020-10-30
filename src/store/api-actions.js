@@ -8,6 +8,9 @@ const {AUTHORIZED} = AuthorizationStatus;
 export const fetchQuestionList = () => (dispatch, _getState, api) => (
   api.get(QUESTIONS)
     .then(({data}) => dispatch(loadQuestions(data)))
+    .catch((error) => {
+      throw error;
+    })
 );
 
 export const checkAuthorization = () => (dispatch, _getState, api) => (

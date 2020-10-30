@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from 'sweetalert';
 
 const BASE_URL = `https://5.react.pages.academy/guess-melody`;
 const REQUEST_TIMEOUT = 5000;
@@ -23,10 +24,10 @@ export const createAPI = (onUnauthorized) => {
 
     if (response.status === UNAUTHORIZED) {
       onUnauthorized();
-      throw error;
+    } else {
+      swal(`Error`, `Something went wrong!`, `error`);
     }
 
-    throw error;
   };
 
   api.interceptors.response.use(onSuccess, onFail);

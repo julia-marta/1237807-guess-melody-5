@@ -4,6 +4,7 @@ import {createStore, applyMiddleware} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
+import swal from 'sweetalert';
 import {createAPI} from "./services/api";
 import App from "./components/app/app";
 import rootReducer from "./store/reducers/root-reducer";
@@ -35,4 +36,7 @@ Promise.all([
       </Provider>,
       document.querySelector(`#root`)
   );
+})
+.catch(() => {
+  swal(`Error`, `Something went wrong!`, `error`);
 });
