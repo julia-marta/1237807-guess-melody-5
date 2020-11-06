@@ -26,4 +26,4 @@ export const HttpCode = {
   UNAUTHORIZED: 401
 };
 
-export const MAX_MISTAKES_COUNT = 13;
+export const MAX_MISTAKES_COUNT = 3;
