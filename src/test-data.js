@@ -56,3 +56,5 @@ MockComponent.propTypes = {
     PropTypes.node
   ]).isRequired,
 };
+
+export const SimpleMockComponent = () => <div />;
