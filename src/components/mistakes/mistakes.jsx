@@ -8,7 +8,7 @@ const Mistakes = (props) => {
 
   return (
     <div className="game__mistakes">
-      {mistakes.map((it, i) => <div key={`mistake-${i}`} className="wrong" />)}
+      {mistakes.map((_it, i) => <div key={`mistake-${i}`} className="wrong" />)}
     </div>
   );
 };
