@@ -31,7 +31,7 @@ it(`Click on form submit should call callback but should not send a form`, () =>
 
 it(`User answers passed to callback should be consistent with "userAnswers" prop`, () => {
   const userAnswers = [false, true, false, false];
-  const onAnswer = jest.fn();
+  const onAnswer = jest.fn((...args) => [...args]);
 
   const wrapper = mount(
       <QuestionGenreScreen onAnswer={onAnswer} question={mockQuestion}
