@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useCallback} from "react";
 import PropTypes from "prop-types";
 import QuestionGenreItem from "../question-genre-item/question-genre-item";
 import {questionGenreProp} from "./question-genre.prop";
@@ -10,6 +10,27 @@ const QuestionGenreScreen = (props) => {
   const {answers, genre} = question;
   const [activePlayerId, setActivePlayerId] = useState(0);
   const [userAnswers, setUserAnswers] = useState(new Array(answers.length).fill(false));
+
+  const submitHandle = useCallback(
+      (evt) => {
+        evt.preventDefault();
+        onAnswer(question, userAnswers);
+      }
+  );
+
+  const answerChangeHandle = useCallback(
+      (id, value) => {
+        const actualUserAnswers = userAnswers.slice(0);
+        actualUserAnswers[id] = value;
+        setUserAnswers(actualUserAnswers);
+      }
+  );
+
+  const playButtonClickHandle = useCallback(
+      (i) => {
+        setActivePlayerId(activePlayerId === i ? -1 : i);
+      }
+  );
 
   return (
     <section className="game game--genre">
@@ -30,21 +51,13 @@ const QuestionGenreScreen = (props) => {
       <section className="game__screen">
         <h2 className="game__title">Выберите {genre} треки</h2>
 
-        <form className="game__tracks"
-          onSubmit={(evt) => {
-            evt.preventDefault();
-            onAnswer(question, userAnswers);
-          }}>
+        <form className="game__tracks" onSubmit={submitHandle}>
 
           {answers.map((answer, i) => (
             <MemoQuestionGenreItem key={`${i}-${answer.src}`} answer={answer}
               id={i} userAnswer={userAnswers[i]} isPlaying={i === activePlayerId}
-              onChange={(id, value) => {
-                const actualUserAnswers = userAnswers.slice(0);
-                actualUserAnswers[id] = value;
-                setUserAnswers(actualUserAnswers);
-              }}
-              onPlayButtonClick={() => setActivePlayerId(activePlayerId === i ? -1 : i)}
+              onChange={(id, value) => answerChangeHandle(id, value)}
+              onPlayButtonClick={() => playButtonClickHandle(i)}
             />
           ))}
 

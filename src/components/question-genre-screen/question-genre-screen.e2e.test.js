@@ -28,6 +28,8 @@ jest.mock(`react`, () => Object.assign({},
 configure({adapter: new Adapter()});
 
 const mockQuestion = questions[0];
+const mockUserAnswers = [false, false, false, false];
+
 const mockEvent = {
   preventDefault() {}
 };
@@ -50,7 +52,6 @@ it(`Click on form submit should call callback but should not send a form`, () =>
 
 it(`User answers passed to callback should be consistent with user answers from state`, () => {
   const onAnswer = jest.fn();
-  const mockUserAnswers = [false, false, false, false];
 
   const wrapper = mount(
       <QuestionGenreScreen onAnswer={onAnswer} question={mockQuestion}>
@@ -75,21 +76,11 @@ it(`Click on answer input should set consistent value to the state`, () => {
   );
 
   const inputOne = wrapper.find(`input`).at(0);
+  const inputTwo = wrapper.find(`input`).at(1);
+
   inputOne.simulate(`change`, {target: {checked: true}});
-  expect(mockSetState).toHaveBeenCalledTimes(1);
   expect(mockSetState.mock.calls[0][0]).toEqual([true, false, false, false]);
-});
-
-it(`Click on play button should set active player id to the state`, () => {
-
-  const wrapper = mount(
-      <QuestionGenreScreen onAnswer={noop} question={mockQuestion}>
-        <React.Fragment />
-      </QuestionGenreScreen>
-  );
-
-  const ButtonThree = wrapper.find(`button.track__button`).at(0);
-  ButtonThree.simulate(`click`);
-  expect(mockSetState).toHaveBeenCalledTimes(1);
-  expect(mockSetState.mock.calls[0][0]).toEqual(3);
+  inputTwo.simulate(`change`, {target: {checked: true}});
+  expect(mockSetState.mock.calls[1][0]).toEqual([false, true, false, false]);
+  expect(mockSetState).toHaveBeenCalledTimes(2);
 });

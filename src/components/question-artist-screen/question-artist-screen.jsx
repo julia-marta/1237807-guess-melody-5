@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useCallback} from "react";
 import PropTypes from "prop-types";
 import Player from "../../components/player/player";
 import questionArtistProp from "./question-artist.prop";
@@ -8,6 +8,19 @@ const QuestionArtistScreen = (props) => {
   const {onAnswer, question, children} = props;
   const {answers, song} = question;
   const [isPlaying, setPlayerState] = useState(true);
+
+  const playButtonClickHandle = useCallback(
+      () => {
+        setPlayerState(!isPlaying);
+      }
+  );
+
+  const answerChangeHandle = useCallback(
+      (answer) => (evt) => {
+        evt.preventDefault();
+        onAnswer(question, answer);
+      }
+  );
 
   return (
     <section className="game game--artist">
@@ -27,7 +40,7 @@ const QuestionArtistScreen = (props) => {
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            <Player src={song.src} isPlaying={isPlaying} onPlayButtonClick={() => setPlayerState(!isPlaying)}/>
+            <Player src={song.src} isPlaying={isPlaying} onPlayButtonClick={playButtonClickHandle}/>
           </div>
         </div>
 
@@ -36,10 +49,7 @@ const QuestionArtistScreen = (props) => {
             <div key={answer.artist} className="artist">
               <input className="artist__input visually-hidden" type="radio" name="answer"
                 value={`answer-${i}`} id={`answer-${i}`}
-                onChange ={(evt) => {
-                  evt.preventDefault();
-                  onAnswer(question, answer);
-                }}
+                onChange ={answerChangeHandle(answer)}
               />
               <label className="artist__name" htmlFor={`answer-${i}`}>
                 <img className="artist__picture" src={answer.picture} alt={answer.artist}/>

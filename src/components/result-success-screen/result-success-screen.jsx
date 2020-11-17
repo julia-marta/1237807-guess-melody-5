@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {resetGame} from "../../store/actions";
@@ -7,6 +7,13 @@ import {declineNumeral} from "../../utils";
 const ResultSuccessScreen = (props) => {
   const {questionsCount, mistakesCount, onReplayButtonClick, resetGameAction} = props;
   const correctAnswersCount = questionsCount - mistakesCount;
+
+  const replayButtonClickHandle = useCallback(
+      () => {
+        resetGameAction();
+        onReplayButtonClick();
+      }
+  );
 
   return (
     <section className="result">
@@ -17,11 +24,7 @@ const ResultSuccessScreen = (props) => {
       <p className="result__total">
         Вы ответили правильно на {declineNumeral(correctAnswersCount, `вопрос`, `вопроса`, `вопросов`)} и совершили {declineNumeral(mistakesCount, `ошибку`, `ошибки`, `ошибок`)}
       </p>
-      <button className="replay" type="button"
-        onClick={() => {
-          resetGameAction();
-          onReplayButtonClick();
-        }}>
+      <button className="replay" type="button" onClick={replayButtonClickHandle}>
         Сыграть ещё раз
       </button>
     </section>

@@ -12,7 +12,7 @@ it(`Click on play button should call callback`, () => {
       <Player isPlaying={false} onPlayButtonClick={handlePlayButtonClick} src={``} />
   );
 
-  const playButton = wrapper.find(`.track__button`);
+  const playButton = wrapper.find(`button.track__button`);
   playButton.simulate(`click`);
 
   expect(handlePlayButtonClick).toHaveBeenCalledTimes(1);
