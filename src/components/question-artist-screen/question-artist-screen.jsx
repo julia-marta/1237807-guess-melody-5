@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
+import Player from "../../components/player/player";
 import questionArtistProp from "./question-artist.prop";
 
 const QuestionArtistScreen = (props) => {
 
-  const {onAnswer, question, renderPlayer, children} = props;
+  const {onAnswer, question, children} = props;
   const {answers, song} = question;
+  const [isPlaying, setPlayerState] = useState(true);
 
   return (
     <section className="game game--artist">
@@ -25,7 +27,7 @@ const QuestionArtistScreen = (props) => {
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            {renderPlayer(song.src, 0)}
+            <Player src={song.src} isPlaying={isPlaying} onPlayButtonClick={() => setPlayerState(!isPlaying)}/>
           </div>
         </div>
 
@@ -54,7 +56,6 @@ const QuestionArtistScreen = (props) => {
 QuestionArtistScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   question: questionArtistProp,
-  renderPlayer: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
 };
 

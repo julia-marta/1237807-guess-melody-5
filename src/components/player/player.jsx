@@ -1,8 +1,27 @@
-import React, {Fragment} from "react";
+import React, {Fragment, createRef, useEffect, useState} from "react";
 import PropTypes from "prop-types";
 
 const Player = (props) => {
-  const {isLoading, onPlayButtonClick, isPlaying, children} = props;
+  const {onPlayButtonClick, isPlaying, src} = props;
+  const audioRef = createRef();
+  const [isLoading, setPlayerState] = useState(true);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    audio.oncanplay = () => {
+      setPlayerState(false);
+    };
+
+    if (isPlaying) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+
+    return () => {
+      audio.oncanplay = null;
+    };
+  }, [isPlaying]);
 
   return (
     <Fragment>
@@ -11,18 +30,14 @@ const Player = (props) => {
         onClick={onPlayButtonClick}
       />
       <div className="track__status">
-        {children}
+        <audio src={src} ref={audioRef} />
       </div>
     </Fragment>
   );
 };
 
 Player.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  src: PropTypes.string.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
 };

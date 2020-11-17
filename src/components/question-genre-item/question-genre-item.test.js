@@ -7,7 +7,7 @@ const answer = questions[0].answers[0];
 
 it(`should QuestionGenreItem render correctly`, () => {
   const tree = renderer
-    .create(<QuestionGenreItem answer={answer} id={0} onChange={noop} renderPlayer={noop} userAnswer={true} />)
+    .create(<QuestionGenreItem answer={answer} id={0} onChange={noop} onPlayButtonClick={noop} isPlaying={false} userAnswer={true} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

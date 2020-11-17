@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Player from "../player/player";
 import {answerProp} from "../question-genre-screen/question-genre.prop";
 
 const QuestionGenreItem = (props) => {
 
-  const {answer, id, onChange, renderPlayer, userAnswer} = props;
+  const {answer, id, isPlaying, onChange, onPlayButtonClick, userAnswer} = props;
 
   return (
     <div className="track">
-      {renderPlayer(answer.src, id)}
+      <Player src={answer.src} isPlaying={isPlaying} onPlayButtonClick={onPlayButtonClick}/>
 
       <div className="game__answer">
         <input className="game__input visually-hidden" type="checkbox" name="answer"
@@ -27,8 +28,9 @@ const QuestionGenreItem = (props) => {
 QuestionGenreItem.propTypes = {
   answer: answerProp.isRequired,
   id: PropTypes.number.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
-  renderPlayer: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
   userAnswer: PropTypes.bool.isRequired,
 };
 
