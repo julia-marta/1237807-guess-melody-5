@@ -12,7 +12,7 @@ const ResultSuccessScreen = (props) => {
       () => {
         resetGameAction();
         onReplayButtonClick();
-      }
+      }, []
   );
 
   return (

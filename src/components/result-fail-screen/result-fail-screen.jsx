@@ -9,7 +9,7 @@ const ResultFailScreen = ({onReplayButtonClick, resetGameAction}) => {
       () => {
         resetGameAction();
         onReplayButtonClick();
-      }
+      }, []
   );
 
   return (

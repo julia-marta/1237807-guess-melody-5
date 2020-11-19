@@ -11,7 +11,7 @@ const QuestionGenreItem = (props) => {
       (evt) => {
         const value = evt.target.checked;
         onChange(id, value);
-      }
+      }, [onChange]
   );
 
   return (

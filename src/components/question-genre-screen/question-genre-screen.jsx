@@ -15,7 +15,7 @@ const QuestionGenreScreen = (props) => {
       (evt) => {
         evt.preventDefault();
         onAnswer(question, userAnswers);
-      }
+      }, [userAnswers]
   );
 
   const answerChangeHandle = useCallback(
@@ -23,13 +23,13 @@ const QuestionGenreScreen = (props) => {
         const actualUserAnswers = userAnswers.slice(0);
         actualUserAnswers[id] = value;
         setUserAnswers(actualUserAnswers);
-      }
+      }, [userAnswers]
   );
 
   const playButtonClickHandle = useCallback(
       (i) => {
         setActivePlayerId(activePlayerId === i ? -1 : i);
-      }
+      }, [activePlayerId]
   );
 
   return (
