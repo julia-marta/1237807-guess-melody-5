@@ -68,7 +68,9 @@ exports[`should GameScreen render correctly with QuestionArtistScreen 1`] = `
         <div
           className="track__status"
         >
-          <audio />
+          <audio
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
+          />
         </div>
       </div>
     </div>
@@ -220,7 +222,9 @@ exports[`should GameScreen render correctly with QuestionGenreScreen 1`] = `
         <div
           className="track__status"
         >
-          <audio />
+          <audio
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
+          />
         </div>
         <div
           className="game__answer"
@@ -254,7 +258,9 @@ exports[`should GameScreen render correctly with QuestionGenreScreen 1`] = `
         <div
           className="track__status"
         >
-          <audio />
+          <audio
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
+          />
         </div>
         <div
           className="game__answer"
@@ -288,7 +294,9 @@ exports[`should GameScreen render correctly with QuestionGenreScreen 1`] = `
         <div
           className="track__status"
         >
-          <audio />
+          <audio
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
+          />
         </div>
         <div
           className="game__answer"
@@ -322,7 +330,9 @@ exports[`should GameScreen render correctly with QuestionGenreScreen 1`] = `
         <div
           className="track__status"
         >
-          <audio />
+          <audio
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
+          />
         </div>
         <div
           className="game__answer"

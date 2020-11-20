@@ -9,7 +9,10 @@ describe(`should GameScreen render correctly`, () => {
       .create(
           <GameScreen questions={questions} step={0} mistakes={0} onUserAnswer={noop} />, {
             createNodeMock: () => {
-              return {};
+              return {
+                play() {},
+                pause() {},
+              };
             }
           }
       )
@@ -23,7 +26,10 @@ describe(`should GameScreen render correctly`, () => {
       .create(
           <GameScreen questions={questions} step={1} mistakes={0} onUserAnswer={noop} />, {
             createNodeMock: () => {
-              return {};
+              return {
+                play() {},
+                pause() {},
+              };
             }
           }
       )

@@ -1,9 +1,16 @@
-import React from "react";
+import React, {useCallback} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {resetGame} from "../../store/actions";
 
 const ResultFailScreen = ({onReplayButtonClick, resetGameAction}) => {
+
+  const replayButtonClickHandle = useCallback(
+      () => {
+        resetGameAction();
+        onReplayButtonClick();
+      }, []
+  );
 
   return (
     <section className="result">
@@ -12,11 +19,7 @@ const ResultFailScreen = ({onReplayButtonClick, resetGameAction}) => {
       </div>
       <h2 className="result__title">Какая жалость!</h2>
       <p className="result__total result__total--fail">У вас закончились все попытки. Ничего, повезёт в следующий раз!</p>
-      <button className="replay" type="button"
-        onClick={() => {
-          resetGameAction();
-          onReplayButtonClick();
-        }}>
+      <button className="replay" type="button" onClick={replayButtonClickHandle}>
         Попробовать ещё раз
       </button>
     </section>

@@ -6,11 +6,10 @@ import {noop} from "../../test-data";
 it(`should Player render correctly`, () => {
   const tree = renderer
     .create(
-        <Player isPlaying={false} isLoading={true} onPlayButtonClick={noop}>
-          <audio />
-        </Player>, {
+        <Player isPlaying={false} onPlayButtonClick={noop} src={``} />, {
           createNodeMock: () => {
-            return {};
+            return {
+            };
           }
         }).toJSON();
 

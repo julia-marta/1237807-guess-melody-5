@@ -9,11 +9,10 @@ it(`Click on play button should call callback`, () => {
   const handlePlayButtonClick = jest.fn();
 
   const wrapper = shallow(
-      <Player isLoading={false} isPlaying={false} onPlayButtonClick={handlePlayButtonClick}>
-        <audio />
-      </Player>);
+      <Player isPlaying={false} onPlayButtonClick={handlePlayButtonClick} src={``} />
+  );
 
-  const playButton = wrapper.find(`.track__button`);
+  const playButton = wrapper.find(`button.track__button`);
   playButton.simulate(`click`);
 
   expect(handlePlayButtonClick).toHaveBeenCalledTimes(1);

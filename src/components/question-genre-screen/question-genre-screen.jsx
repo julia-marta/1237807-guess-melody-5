@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useCallback} from "react";
 import PropTypes from "prop-types";
 import QuestionGenreItem from "../question-genre-item/question-genre-item";
 import {questionGenreProp} from "./question-genre.prop";
@@ -6,8 +6,31 @@ import {questionGenreProp} from "./question-genre.prop";
 const MemoQuestionGenreItem = React.memo(QuestionGenreItem);
 
 const QuestionGenreScreen = (props) => {
-  const {onAnswer, onChange, question, renderPlayer, children, userAnswers} = props;
+  const {onAnswer, question, children} = props;
   const {answers, genre} = question;
+  const [activePlayerId, setActivePlayerId] = useState(0);
+  const [userAnswers, setUserAnswers] = useState(new Array(answers.length).fill(false));
+
+  const submitHandle = useCallback(
+      (evt) => {
+        evt.preventDefault();
+        onAnswer(question, userAnswers);
+      }, [userAnswers]
+  );
+
+  const answerChangeHandle = useCallback(
+      (id, value) => {
+        const actualUserAnswers = userAnswers.slice(0);
+        actualUserAnswers[id] = value;
+        setUserAnswers(actualUserAnswers);
+      }, [userAnswers]
+  );
+
+  const playButtonClickHandle = useCallback(
+      (i) => {
+        setActivePlayerId(activePlayerId === i ? -1 : i);
+      }, [activePlayerId]
+  );
 
   return (
     <section className="game game--genre">
@@ -28,15 +51,14 @@ const QuestionGenreScreen = (props) => {
       <section className="game__screen">
         <h2 className="game__title">Выберите {genre} треки</h2>
 
-        <form className="game__tracks"
-          onSubmit={(evt) => {
-            evt.preventDefault();
-            onAnswer();
-          }}>
+        <form className="game__tracks" onSubmit={submitHandle}>
 
           {answers.map((answer, i) => (
-            <MemoQuestionGenreItem key={`${i}-${answer.src}`} answer={answer} id={i}
-              onChange={onChange} renderPlayer={renderPlayer} userAnswer={userAnswers[i]} />
+            <MemoQuestionGenreItem key={`${i}-${answer.src}`} answer={answer}
+              id={i} userAnswer={userAnswers[i]} isPlaying={i === activePlayerId}
+              onChange={(id, value) => answerChangeHandle(id, value)}
+              onPlayButtonClick={() => playButtonClickHandle(i)}
+            />
           ))}
 
           <button className="game__submit button" type="submit">Ответить</button>
@@ -48,11 +70,8 @@ const QuestionGenreScreen = (props) => {
 
 QuestionGenreScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
   question: questionGenreProp,
-  renderPlayer: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
-  userAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired,
 };
 
 export default QuestionGenreScreen;
