@@ -14,7 +14,7 @@ const {ROOT, GAME, LOGIN, SUCCESS, FAIL} = AppRoute;
 const App = () => {
 
   return (
-    <BrowserRouter basename={`/1237807-guess-melody-5`} history={browserHistory}>
+    <BrowserRouter basename={ROOT} history={browserHistory}>
       <Switch>
         <Route exact path={ROOT} render={({history}) => (
           <WelcomeScreen onPlayButtonClick={() => history.push(GAME)} errorsCount={MAX_MISTAKES_COUNT} />
