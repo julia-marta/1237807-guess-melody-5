@@ -1,5 +1,5 @@
 import React from "react";
-import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
+import {Switch, Route, HashRouter as BrowserRouter} from "react-router-dom";
 import WelcomeScreen from "../welcome-screen/welcome-screen";
 import LoginScreen from "../login-screen/login-screen";
 import ResultSuccessScreen from "../result-success-screen/result-success-screen";
@@ -14,7 +14,7 @@ const {ROOT, GAME, LOGIN, SUCCESS, FAIL} = AppRoute;
 const App = () => {
 
   return (
-    <BrowserRouter history={browserHistory}>
+    <BrowserRouter basename={`/1237807-guess-melody-5`} history={browserHistory}>
       <Switch>
         <Route exact path={ROOT} render={({history}) => (
           <WelcomeScreen onPlayButtonClick={() => history.push(GAME)} errorsCount={MAX_MISTAKES_COUNT} />
